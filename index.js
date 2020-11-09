@@ -49,7 +49,11 @@ async function init() {
       cronista(element)
         .find("div.numDolar") //target dolar values
         .each((i, subElement) => {
-          valor.push(parseFloat(cronista(subElement).html().trim().slice(2)));
+          valor.push(
+            parseFloat(
+              cronista(subElement).html().trim().slice(2).replace(",", ".")
+            )
+          );
         });
 
       for (var i = 0; i < transaccion.length; i++) {
