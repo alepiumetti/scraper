@@ -1,7 +1,10 @@
 const cheerio = require("cheerio");
 const request = require("request-promise");
+const fs = require("fs");
 
 async function init() {
+  let datosDolar;
+
   try {
     // const nacion = await request({
     //   uri: "https://www.bna.com.ar/Personas",
@@ -66,9 +69,17 @@ async function init() {
       }
     });
 
-    console.log(object);
+    datosDolar = JSON.stringify(object);
+
+    console.log(datosDolar);
   } catch (error) {
     console.warn(error);
+  }
+
+  try {
+    fs.writeFileSync("./data/data.json", datosDolar);
+  } catch (error) {
+    console.error(error);
   }
 }
 
