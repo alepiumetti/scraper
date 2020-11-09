@@ -24,13 +24,11 @@ async function init() {
       transform: (body) => cheerio.load(body),
     });
 
-    let dolarCronista = {};
-    const list = [];
+    let object = {};
 
     cronista("div.cotizacion").each((index, element) => {
       let transaccion = [];
       let valor = [];
-      let object = {};
 
       let tipoDolar = cronista(element).find("a").text().trim();
 
@@ -66,13 +64,9 @@ async function init() {
           };
         }
       }
-
-      list.push(object);
     });
 
-    dolarCronista = list;
-
-    console.log(dolarCronista);
+    console.log(object);
   } catch (error) {
     console.warn(error);
   }
