@@ -30,34 +30,40 @@ async function init() {
     cronista("div.cotizacion").each((index, element) => {
       transaccion = [];
       valor = [];
+      object = {};
 
       let tipoDolar = cronista(element).find("a").text().trim();
 
+      tipoDolar = tipoDolar //parser
+        .toLowerCase()
+        .replace(/ó/g, "o")
+        .replace(/ /g, "")
+        .replace("/", "");
+
       cronista(element)
-        .find("div.numAsk")
+        .find("div.numAsk") //target compra/venta
         .each((i, subElement) => {
           transaccion.push(cronista(subElement).html().trim());
         });
 
       cronista(element)
-        .find("div.numDolar")
+        .find("div.numDolar") //target dolar values
         .each((i, subElement) => {
-          valor.push(cronista(subElement).html().trim());
+          valor.push(parseFloat(cronista(subElement).html().trim().slice(2)));
         });
 
       for (var i = 0; i < transaccion.length; i++) {
         if (transaccion[i] === "Venta") {
-          list.push({
-            tipo: tipoDolar,
-            venta: valor[i],
-          });
+          object[tipoDolar] = { ...object[tipoDolar], venta: valor[i] };
         } else {
-          list.push({
-            tipo: tipoDolar,
+          object[tipoDolar] = {
+            ...object[tipoDolar],
             compra: valor[i],
-          });
+          };
         }
       }
+
+      list.push(object);
     });
 
     dolarCronista = list;
