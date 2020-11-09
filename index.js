@@ -28,9 +28,9 @@ async function init() {
     const list = [];
 
     cronista("div.cotizacion").each((index, element) => {
-      transaccion = [];
-      valor = [];
-      object = {};
+      let transaccion = [];
+      let valor = [];
+      let object = {};
 
       let tipoDolar = cronista(element).find("a").text().trim();
 
