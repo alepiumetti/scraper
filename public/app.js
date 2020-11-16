@@ -32,3 +32,9 @@ setTimeout(() => {
     tablaDolar.appendChild(hilera);
   });
 }, 3000);
+
+//https://www.lacapital.com.ar/rss/economia.xml
+//https://www.clarin.com/rss.html
+//https://www.cronista.com/rss.html
+//https://servicios.lanacion.com.ar/herramientas/rss/ayuda
+//https://www.pagina12.com.ar/pagina/rss
