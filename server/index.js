@@ -30,5 +30,3 @@ app.use(require("./routes/api"));
 app.listen(app.get(`port`), () => {
   console.log(`Server on http://localhost:${app.get(`port`)}`);
 });
-
-exports.app = functions.https.onRequest(app);
