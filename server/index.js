@@ -4,10 +4,6 @@ const morgan = require("morgan");
 var exphbs = require("express-handlebars");
 const path = require("path");
 var cors = require("cors");
-const { Router } = require("express");
-const router = Router();
-const data = require("./data/data.json");
-let scraper = require("./scraper");
 
 //settings
 
@@ -25,11 +21,7 @@ app.use(express.json());
 
 //routes
 
-router.get("/api/dolar", (req, res) => {
-  scraper.then(() => {
-    res.json(data);
-  });
-});
+app.use(require("./routes/api"));
 
 //starting server
 
