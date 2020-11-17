@@ -73,13 +73,13 @@ async function init() {
 
     console.log(datosDolar);
   } catch (error) {
-    console.warn(error);
+    console.error("Error en la petición de datos: ", error);
   }
 
   try {
-    fs.writeFileSync("./data/data.json", datosDolar);
+    fs.writeFileSync(`${__dirname}/data/data.json`, datosDolar, "utf8");
   } catch (error) {
-    console.error(error);
+    console.error("Error en la creación de datos: ", error);
   }
 }
 

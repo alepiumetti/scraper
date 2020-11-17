@@ -4,7 +4,7 @@ let dolar;
 
 const data = async () => {
   try {
-    dolar = await axios.get("http://localhost:5001/api/dolar");
+    dolar = await axios.get("https://api-scrapper.herokuapp.com/api/dolar");
   } catch (error) {
     console.log(error);
   }
