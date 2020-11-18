@@ -83,4 +83,12 @@ async function init() {
   }
 }
 
-module.exports = init();
+let interval;
+
+function intervalScraper() {
+  interval = setInterval(() => {
+    init();
+  }, 1000 * 30);
+}
+
+module.exports = intervalScraper();
