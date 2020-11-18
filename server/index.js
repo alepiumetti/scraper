@@ -9,10 +9,6 @@ var cors = require("cors");
 
 app.set(`port`, process.env.PORT || 3000);
 
-app.engine("handlebars", exphbs());
-app.set("views", path.join(__dirname, "/views"));
-app.set("view engine", "handlebars");
-
 //middlewares
 
 app.use(cors());
