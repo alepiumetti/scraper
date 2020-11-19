@@ -3,28 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link stylesheet="style.css">
-</head>
+  <title>Dolar Hoy</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/></head>
 <body>
-  <h1>Dolar hoy</h1>
-  <table>
-    <tr >
-      <td>
-        Dolar
-      </td>
-      <td>
-        Compra
-      </td>
-      <td>
-        Venta
-      </td>
-    </tr>
-    <tbody id="tabla-dolar">
+  <div class="container">
+   <div class="container-table">
+     
+     <div class="container-title">
 
-    </tbody>
-  </table>
+        <div class="title">
+          <!-- <img src="imgs/smartphone.png" class="img"/> -->
+          <h1 style="text-transform: uppercase; font-weight: bolder;">Dolar hoy</h1>
+        </div>
+     </div>
+      <table class="table">
+        <tr >
+          <th>
+            Dolar
+          </th>
+          <th>
+           Compra
+          </th>
+          <th>
+            Venta
+          </th>
+        </tr>
+        <tbody id="tabla-dolar">
+    
+        </tbody>
+      </table>
+   </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
   <script src="app.js" ></script>
+  <div class="credit">
+    Créditos:
+    <a class="text-credit" href="https://alejandropiumetti.com.ar">Alejandro Piumetti</a> | 
+    <a class="text-credit" href="https://github.com/alepiumetti/scraper">Repositorio</a> | 
+    <a class="text-credit" href="https://www.cronista.com/MercadosOnline/dolar.html">Fuente</a>
+
+    <!-- Icons made by <a href="https://www.flaticon.com/authors/surang" title="surang">surang</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 </body>
 </html>
