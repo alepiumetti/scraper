@@ -25,4 +25,4 @@ El servidor te devolverá un JSON de Formato:
 
 La web está hecha con HTML y JS Vanilla, hosteada en Firebase Hosting. Pide los datos a través de axios.
 
-Podés acceder a la web [acá]()
+Podés acceder a la web [acá](https://scraper-3c915.web.app/)
