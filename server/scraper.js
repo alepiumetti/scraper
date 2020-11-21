@@ -78,6 +78,8 @@ async function init() {
 
   try {
     fs.writeFileSync(`${__dirname}/data/data.json`, datosDolar, "utf8");
+    console.log("creación de archivo datosDolar", datosDolar);
+    console.log("`${__dirname}/data/data.json`", `${__dirname}/data/data.json`);
   } catch (error) {
     console.error("Error en la creación de datos: ", error);
   }
