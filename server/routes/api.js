@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const data = require("../data/data.json");
-const scraper = require(`${__dirname}/data/data.json`);
+const data = require(`${__dirname}/data/data.json`);
+const scraper = require("../scraper");
 
 router.get("/api/dolar", (req, res) => {
   scraper;
