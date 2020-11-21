@@ -88,7 +88,7 @@ let interval;
 function intervalScraper() {
   interval = setInterval(() => {
     init();
-  }, 1000 * 60 * 30);
+  }, 1000 * 60 * 15);
 }
 
 module.exports = intervalScraper();
