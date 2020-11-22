@@ -2,14 +2,6 @@ const cheerio = require("cheerio");
 const request = require("request-promise");
 const fs = require("fs");
 
-var Datastore = require("nedb"),
-  db = new Datastore({ filename: `${__dirname}/data/data` });
-db.loadDatabase(function (err) {
-  console.log("error en la carga de DB", err);
-  // Callback is optional
-  // Now commands will be executed
-});
-
 async function init() {
   let datosDolar;
 
@@ -77,19 +69,15 @@ async function init() {
       }
     });
 
-    // datosDolar = JSON.stringify(object);
-    datosDolar = object;
+    datosDolar = JSON.stringify(object);
 
-    console.log(object);
+    console.log(datosDolar);
   } catch (error) {
     console.error("Error en la petición de datos: ", error);
   }
 
   try {
-    db.insert(datosDolar, function (error) {
-      console.error("Error en la carga de datos:", error);
-    });
-    // fs.writeFileSync(`${__dirname}/data/data.json`, datosDolar, "utf8");
+    fs.writeFileSync(`${__dirname}/data/data.json`, datosDolar, "utf8");
     console.log("creación de archivo datosDolar", datosDolar);
     console.log("`${__dirname}/data/data.json`", `${__dirname}/data/data.json`);
   } catch (error) {
@@ -102,7 +90,7 @@ let interval;
 function intervalScraper() {
   interval = setInterval(() => {
     init();
-  }, 1000 * 30);
+  }, 1000 * 60 * 30);
 }
 
 module.exports = intervalScraper();
