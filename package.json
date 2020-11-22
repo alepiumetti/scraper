@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "scraper": "node server/scraper.js",
     "start": "node server/index.js",
-    "dev":"nodemon server/index.js"
+    "dev": "nodemon server/index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "express-handlebars": "^5.2.0",
     "handlebars": "^4.7.6",
     "morgan": "^1.10.0",
+    "nedb": "^1.8.0",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
   },
