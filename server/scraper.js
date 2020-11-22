@@ -3,7 +3,7 @@ const request = require("request-promise");
 const fs = require("fs");
 
 var Datastore = require("nedb"),
-  db = new Datastore({ filename: `${__dirname}/data/data.json` });
+  db = new Datastore({ filename: `${__dirname}/data/data` });
 db.loadDatabase(function (err) {
   console.log("error en la carga de DB", err);
   // Callback is optional
