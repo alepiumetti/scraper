@@ -1,27 +1,18 @@
 const cheerio = require("cheerio");
 const request = require("request-promise");
 const fs = require("fs");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const { write } = require("lowdb/adapters/FileSync");
 
+const adapter = new FileSync(`${__dirname}/data/db.json`);
+const db = low(adapter);
 async function init() {
   let datosDolar;
+  let datosDolarJSON;
+  let datosDB;
 
   try {
-    // const nacion = await request({
-    //   uri: "https://www.bna.com.ar/Personas",
-    //   transform: (body) => cheerio.load(body),
-    // });
-
-    // const santander = await request({
-    //   uri: "https://banco.santanderrio.com.ar/exec/cotizacion/index.jsp",
-    //   transform: (body) => cheerio.load(body),
-    // });
-
-    // const galicia = await request({
-    //   uri:
-    //     "https://www.bancogalicia.com/banca/online/web/Personas/ProductosyServicios/Cotizador",
-    //   transform: (body) => cheerio.load(body),
-    // });
-
     const cronista = await request({
       uri: "https://www.cronista.com/MercadosOnline/dolar.html",
       transform: (body) => cheerio.load(body),
@@ -60,6 +51,11 @@ async function init() {
       for (var i = 0; i < transaccion.length; i++) {
         if (transaccion[i] === "Venta") {
           object[tipoDolar] = { ...object[tipoDolar], venta: valor[i] };
+
+          /* if (object[tipoDolar] === undefined) {
+          } else {
+            object[tipoDolar] = { ...object[tipoDolar], venta: valor[i] };
+          } */
         } else {
           object[tipoDolar] = {
             ...object[tipoDolar],
@@ -69,17 +65,16 @@ async function init() {
       }
     });
 
-    datosDolar = JSON.stringify(object);
-
-    console.log(datosDolar);
+    datosDolar = object;
+    datosDolarJSON = JSON.stringify(object);
   } catch (error) {
     console.error("Error en la petición de datos: ", error);
   }
 
   try {
-    fs.writeFileSync(`${__dirname}/data/data.json`, datosDolar, "utf8");
-    console.log("creación de archivo datosDolar", datosDolar);
-    console.log("`${__dirname}/data/data.json`", `${__dirname}/data/data.json`);
+    await db.update(datosDolar, datosDolar).write();
+
+    console.log("creación de archivo datosDolar", datosDolarJSON);
   } catch (error) {
     console.error("Error en la creación de datos: ", error);
   }
@@ -90,7 +85,7 @@ let interval;
 function intervalScraper() {
   interval = setInterval(() => {
     init();
-  }, 1000 * 60 * 30);
+  }, 1000 * 30);
 }
 
 module.exports = intervalScraper();

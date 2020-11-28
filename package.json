@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "handlebars": "^4.7.6",
+    "lowdb": "^1.0.0",
     "morgan": "^1.10.0",
     "nedb": "^1.8.0",
     "request": "^2.88.2",

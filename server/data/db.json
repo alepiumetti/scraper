@@ -1,0 +1,27 @@
+{
+  "datosDolar": {
+    "dolarbanconacion": {
+      "compra": 70,
+      "venta": 86
+    },
+    "dolarblue": {
+      "compra": 153,
+      "venta": 157
+    },
+    "dolarsolidario": {
+      "venta": 141.9
+    },
+    "dolarmayorista": {
+      "compra": 80.69,
+      "venta": 80.89
+    },
+    "dolarmepcontado": {
+      "compra": 147.06,
+      "venta": 147.19
+    },
+    "dolarcdocliqui": {
+      "compra": 149.19,
+      "venta": 149.26
+    }
+  }
+}
