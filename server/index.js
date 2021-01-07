@@ -8,7 +8,10 @@ const scraper = require("./scraper");
 
 //settings
 
-app.set(`port`, process.env.PORT || 3000);
+app.set(
+  `port`,
+  /*process.env.PORT || selecciona el puerto que brinda el servidor */ 3000
+);
 
 //middlewares
 
