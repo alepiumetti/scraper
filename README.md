@@ -26,3 +26,7 @@ El servidor te devolverá un JSON de Formato:
 La web está hecha con HTML y JS Vanilla, hosteada en Firebase Hosting. Pide los datos a través de axios.
 
 Podés acceder a la web [acá](https://scraper-3c915.web.app/)
+
+## Importante
+
+El API no está funcionando correctamente por lo que la web no está consumiendo los datos. 
