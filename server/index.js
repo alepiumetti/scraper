@@ -1,10 +1,6 @@
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
-var exphbs = require("express-handlebars");
-const path = require("path");
 var cors = require("cors");
-const scraper = require("./scraper");
 
 //settings
 

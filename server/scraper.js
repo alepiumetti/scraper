@@ -1,16 +1,10 @@
 const cheerio = require("cheerio");
 const request = require("request-promise");
 const fs = require("fs");
-const low = require("lowdb");
-const FileSync = require("lowdb/adapters/FileSync");
-const { write } = require("lowdb/adapters/FileSync");
 
-const adapter = new FileSync(`${__dirname}/data/db.json`);
-const db = low(adapter);
 async function init() {
   let datosDolar;
   let datosDolarJSON;
-  let datosDB;
 
   try {
     const cronista = await request({
@@ -20,48 +14,44 @@ async function init() {
 
     let object = {};
 
-    cronista("div.cotizacion").each((index, element) => {
-      let transaccion = [];
-      let valor = [];
+    cronista("li[data-vplscroll-item]").each((index, element) => {
+      // console.log(cronista(element).html());
 
-      let tipoDolar = cronista(element).find("a").text().trim();
+      let tipoDolar = cronista(element).find("span[class=name]").text().trim();
+      // target al nombre del tipo de dolar
+      // devuelve string
 
-      tipoDolar = tipoDolar //parser
+      var regex =
+        /((?:[\0-\x08\x0B\f\x0E-\x1F\uFFFD\uFFFE\uFFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]))/g; //expresión regular para parsear el tipo de dato.
+
+      tipoDolar = tipoDolar
+        .toString() //parser
         .toLowerCase()
-        .replace(/ó/g, "o")
+        .replace(regex, "o")
+        .replace(/ó/gi, "o")
         .replace(/ /g, "")
         .replace("/", "");
 
-      cronista(element)
-        .find("div.numAsk") //target compra/venta
-        .each((i, subElement) => {
-          transaccion.push(cronista(subElement).html().trim());
-        });
+      //parsea string con minuscula, sin espacio y caracteres normales
 
-      cronista(element)
-        .find("div.numDolar") //target dolar values
-        .each((i, subElement) => {
-          valor.push(
-            parseFloat(
-              cronista(subElement).html().trim().slice(2).replace(",", ".")
-            )
-          );
-        });
-
-      for (var i = 0; i < transaccion.length; i++) {
-        if (transaccion[i] === "Venta") {
-          object[tipoDolar] = { ...object[tipoDolar], venta: valor[i] };
-
-          /* if (object[tipoDolar] === undefined) {
-          } else {
-            object[tipoDolar] = { ...object[tipoDolar], venta: valor[i] };
-          } */
-        } else {
-          object[tipoDolar] = {
-            ...object[tipoDolar],
-            compra: valor[i],
-          };
-        }
+      if (cronista(element).find("div[class=sell-value]").html() != null) {
+        object = {
+          ...object,
+          [tipoDolar]: {
+            compra: parseFloat(
+              cronista(element)
+                .find("div[class=buy-value]")
+                .text()
+                .replace(",", ".")
+            ), //target compra
+            venta: parseFloat(
+              cronista(element)
+                .find("div[class=sell-value]")
+                .text()
+                .replace(",", ".")
+            ), //target venta
+          },
+        };
       }
     });
 
@@ -72,7 +62,7 @@ async function init() {
   }
 
   try {
-    await db.update(datosDolar, datosDolar).write();
+    await fs.writeFileSync(`${__dirname}/data/db.json`, datosDolarJSON);
 
     console.log("creación de archivo datosDolar", datosDolarJSON);
   } catch (error) {
@@ -83,9 +73,8 @@ async function init() {
 let interval;
 
 function intervalScraper() {
-  interval = setInterval(() => {
-    init();
-  }, 1000 * 30);
+  init();
+  interval = setInterval(() => {}, 1000 * 60 * 30);
 }
 
 module.exports = intervalScraper();

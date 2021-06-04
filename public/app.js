@@ -4,7 +4,9 @@ let dolar;
 
 const data = async () => {
   try {
-    dolar = await axios.get("https://api-scrapper.herokuapp.com/api/dolar");
+    dolar = await axios.get(
+      "https://scraper.alejandropiumetti.com.ar/api/dolar"
+    );
 
     let obj = Object.keys(dolar.data);
     Object.keys(dolar.data).forEach((key) => {
@@ -38,7 +40,7 @@ data();
 
 function cambioTipoDolar(tipoDolar) {
   switch (tipoDolar) {
-    case "dolarbanconacion":
+    case "dolarbna":
       return "Dólar Banco Nación";
       break;
     case "dolarblue":
