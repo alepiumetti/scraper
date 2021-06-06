@@ -22,5 +22,5 @@ app.use(require("./routes/api"));
 //starting server
 
 app.listen(app.get(`port`), () => {
-  console.log(`Server on http://localhost:${app.get(`port`)}`);
+  console.log(`Server on ${app.get(`port`)}`);
 });
